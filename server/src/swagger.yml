@@ -1,0 +1,93 @@
+openapi: 3.0.1
+info:
+  title: Nadia's Demo Swagger
+  description: This is the swagger file that goes with our server code
+  version: 1.0.0
+servers:
+- url: /api
+paths:
+  /login:
+    post:
+      tags:
+      - User Authentication
+      summary: Account login
+      description: User login. Takes in a post request with username/email and password
+      operationId: routes.login
+      requestBody:
+        description: login data
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: its email
+                password:
+                  type: string
+                  description: password
+        required: true
+      responses:
+        200:
+          description: OK, JWT login token issued
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    access_token:
+                      type: string
+                      description: user access token
+      x-codegen-request-body-name: data
+  /secret:
+    get:
+      tags:
+        - User Secret
+      summary: Return secret string
+      operationId: routes.get_secret
+      responses:
+        '200':
+          description: secret response
+          content:
+            'text/plain':
+              schema:
+                type: string
+#      security:
+#      - jwt: ['secret']
+  /verify:
+    get:
+      tags:
+        - User Authentication
+      summary: verify user
+      operationId: routes.verify
+      responses:
+        '200':
+          description: verify user
+          content:
+            'text/plain':
+              schema:
+                type: string
+#      security:
+#      - jwt: ['secret']
+  /info:
+    get:
+      tags:
+        - Open API
+      summary: Return system information
+      operationId: routes.get_info
+      responses:
+        '200':
+          description: sys info
+          content:
+            'text/plain':
+              schema:
+                type: string
+
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,6 @@
+/client/node_modules/
+/client/.vscode/
+.idea
+/client/package-lock.json
+/server/__pycache__/
+/server/tests/.pytest_cache

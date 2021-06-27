@@ -1,0 +1,11 @@
+flask
+connexion[swagger-ui]
+flask-sqlalchemy==2.1.0
+flask-marshmallow
+marshmallow-sqlalchemy
+marshmallow
+psycopg2
+flask-jwt-extended
+bcrypt
+flask-cors
+pytest
