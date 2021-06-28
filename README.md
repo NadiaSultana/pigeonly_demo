@@ -94,7 +94,7 @@ docker-compose up
 ```sh
 cd client
 npm install
-npm run
+npm start
 ```
 <!-- USAGE EXAMPLES -->
 <div id="usage"></div>
