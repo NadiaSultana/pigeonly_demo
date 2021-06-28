@@ -55,7 +55,8 @@ def get_secret():
             secret_schema = SecretSchema()
             data = secret_schema.load(r.json())
         except ValidationError as err:
-            return {"errors": err.messages}, 422
+            print(err.messages)
+            return jsonify(text="No Jokes chuck norris"), 422
         return jsonify(text=data.get("value")), 200
     except requests.exceptions.HTTPError as e:
         print(e.response.text)

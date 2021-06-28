@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: Nadia's Demo Swagger
   description: This is the swagger file that goes with our server code
-  version: 1.0.0
+  version: 1.0.1
 servers:
 - url: /api
 paths:
@@ -33,14 +33,31 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    access_token:
-                      type: string
-                      description: user access token
-      x-codegen-request-body-name: data
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: user access token
+        401:
+          description: Bad email or password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: server message
+        500:
+          description: Internal Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: server message
   /secret:
     get:
       tags:
@@ -51,9 +68,13 @@ paths:
         '200':
           description: secret response
           content:
-            'text/plain':
+            application/json:
               schema:
-                type: string
+                type: object
+                properties:
+                  text:
+                    type: string
+                    description: secert message
 #      security:
 #      - jwt: ['secret']
   /verify:
@@ -68,7 +89,7 @@ paths:
           content:
             'text/plain':
               schema:
-                type: string
+                type: boolean
 #      security:
 #      - jwt: ['secret']
   /info:
@@ -81,9 +102,22 @@ paths:
         '200':
           description: sys info
           content:
-            'text/plain':
+            application/json:
               schema:
-                type: string
+                type: object
+                properties:
+                  address:
+                    type: string
+                    description: server address
+                  date:
+                    type: string
+                    description: current date
+                  hostname:
+                    type: string
+                    description: server host name
+                  time:
+                    type: string
+                    description: current server time
 
 components:
   securitySchemes:

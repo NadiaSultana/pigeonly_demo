@@ -40,7 +40,7 @@ const Login = ({ setAuth }) => {
                 toast.success("Logged in Successfully");
             } else {
                 setAuth(false);
-                toast.error(parseRes);
+                toast.error(parseRes.msg);
             }
         } catch (err) {
             console.error(err.message);
